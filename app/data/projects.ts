@@ -17,7 +17,7 @@ export const projects: Project[] = [
     title: "Finance Learning",
     description:
       "An interactive app for building financial literacy through hands-on lessons.",
-    href: "http://localhost:3000",
+    href: "https://finance-learning-website.vercel.app",
     status: "live",
     icon: "chart",
   },
@@ -26,19 +26,20 @@ export const projects: Project[] = [
     title: "Snake",
     description:
       "Classic grid-based Snake with a fixed-tick game loop, buffered input, and mobile swipe controls.",
-    href: "http://localhost:3001",
+    href: "https://snake-game-gmalikprojects.vercel.app",
     status: "live",
     icon: "grid",
     tags: ["React", "Vite", "Tailwind", "Canvas"],
   },
   {
-    slug: "project-two",
-    title: "Project two",
+    slug: "job-application-tracker",
+    title: "Job Application Tracker",
     description:
-      "A placeholder for the second app. What problem it solves, not how it works internally.",
-    href: null,
-    status: "in-progress",
-    icon: "chevrons",
+      "Tracks job applications and contacts, with login and a scheduled demo-data reset.",
+    href: "https://job-application-tracker-seven-ecru.vercel.app",
+    status: "live",
+    icon: "terminal",
+    tags: ["Next.js", "Prisma"],
   },
   {
     slug: "project-three",
