@@ -55,7 +55,7 @@ export const projects: Project[] = [
     title: "Valuation Tracker",
     description:
       "A dashboard for tracking company valuations, price targets, and implied returns over time.",
-    href: "https://valuation-tracker.vercel.app",
+    href: "https://valuation-tracker-indol.vercel.app",
     status: "live",
     icon: "chart",
     tags: ["Next.js", "Recharts", "Vercel Blob"],
