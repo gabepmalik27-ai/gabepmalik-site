@@ -88,38 +88,6 @@ export function SearchIcon({ className }: { className?: string }) {
   );
 }
 
-export function SunIcon({ className }: { className?: string }) {
-  return (
-    <svg
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth={2}
-      strokeLinecap="round"
-      strokeDasharray="2 3"
-      className={className}
-    >
-      <circle cx="12" cy="12" r="4" strokeDasharray="none" />
-      <path d="M12 3v1.5M12 19.5V21M21 12h-1.5M4.5 12H3M18.4 5.6l-1.1 1.1M6.7 17.3l-1.1 1.1M18.4 18.4l-1.1-1.1M6.7 6.7 5.6 5.6" />
-    </svg>
-  );
-}
-
-export function MenuIcon({ className }: { className?: string }) {
-  return (
-    <svg
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth={2}
-      strokeLinecap="round"
-      className={className}
-    >
-      <path d="M4 7h16M4 12h16M4 17h16" />
-    </svg>
-  );
-}
-
 export const projectIcons = {
   chart: ChartIcon,
   chevrons: ChevronsIcon,

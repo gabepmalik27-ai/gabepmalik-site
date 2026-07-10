@@ -16,21 +16,24 @@ export default function Home() {
   );
 
   return (
-    <div className="relative flex flex-1 flex-col bg-black font-sans">
+    <div className="relative min-h-screen bg-base font-sans text-primary">
       <BackgroundDecor />
+      <SiteHeader query={query} onQueryChange={setQuery} />
 
-      <div className="relative flex flex-1 flex-col">
-        <SiteHeader query={query} onQueryChange={setQuery} />
+      <main className="relative mx-auto w-full max-w-6xl px-6 pt-36 pb-16 sm:px-10">
+        <p className="font-mono text-xs tracking-[0.3em] text-muted">
+          SELECTED WORK
+        </p>
+        <h1 className="mt-3 font-display text-5xl font-extrabold tracking-tight text-primary sm:text-6xl">
+          Projects
+        </h1>
 
-        <main className="mx-auto w-full max-w-6xl flex-1 px-6 pt-16 pb-12 sm:px-10">
-          <p className="font-mono text-sm tracking-[0.3em] text-zinc-500">
-            SELECTED WORK
+        {filtered.length === 0 ? (
+          <p className="mt-4 font-mono text-xs text-muted">
+            no projects match &quot;{query}&quot;
           </p>
-          <h1 className="mt-3 text-6xl font-extrabold tracking-tight text-zinc-50">
-            Projects
-          </h1>
-
-          <div className="mt-12 grid grid-cols-1 gap-6 md:grid-cols-3">
+        ) : (
+          <div className="mt-12 grid grid-cols-1 gap-6 md:grid-cols-2">
             {filtered.map((project) => (
               <ProjectCard
                 key={project.slug}
@@ -40,13 +43,13 @@ export default function Home() {
               />
             ))}
           </div>
-        </main>
+        )}
+      </main>
 
-        <footer className="px-6 py-8 font-mono text-xs text-zinc-600 sm:px-10">
-          <p>Gabriel Malik — {new Date().getFullYear()}</p>
-          <p>STATUS: OPERATIONAL · REV.01</p>
-        </footer>
-      </div>
+      <footer className="relative mx-auto max-w-6xl border-t border-edge px-6 py-8 font-mono text-xs text-muted sm:px-10">
+        <p>Gabriel Malik — {new Date().getFullYear()}</p>
+        <p>STATUS: OPERATIONAL · REV.01</p>
+      </footer>
     </div>
   );
 }

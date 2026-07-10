@@ -2,8 +2,8 @@ import type { Project } from "../data/projects";
 import { projectIcons } from "./icons";
 
 const statusStyles: Record<Project["status"], string> = {
-  "in-progress": "border-amber-400/40 text-amber-400",
-  live: "border-emerald-400/40 text-emerald-400",
+  "in-progress": "border-[#D9985F]/40 text-[#D9985F]",
+  live: "border-accent/40 text-accent",
 };
 
 const statusLabels: Record<Project["status"], string> = {
@@ -28,7 +28,7 @@ export default function ProjectCard({
   const content = (
     <>
       <div className="flex items-center justify-between">
-        <span className="font-mono text-xs text-zinc-500">
+        <span className="font-mono text-xs text-muted">
           {number} / {count}
         </span>
         <span
@@ -39,21 +39,23 @@ export default function ProjectCard({
       </div>
 
       <div className="flex flex-1 items-center justify-center py-10">
-        <div className="relative flex h-24 w-24 items-center justify-center rounded-full border border-white/15">
+        <div className="relative flex h-24 w-24 items-center justify-center rounded-full border border-edge bg-accent-muted">
           {isLive && (
-            <div className="absolute inset-0 -z-10 rounded-full bg-emerald-400/10 blur-xl" />
+            <div className="absolute inset-0 -z-10 rounded-full bg-accent/20 blur-xl" />
           )}
-          <Icon className="h-9 w-9 text-zinc-300" />
+          <Icon className="h-9 w-9 text-accent" />
         </div>
       </div>
 
       <div className="flex flex-col gap-1.5">
-        <h2 className="text-lg font-bold text-zinc-50">{project.title}</h2>
-        <p className="text-sm leading-6 text-zinc-400">
+        <h2 className="font-display text-lg font-bold text-primary">
+          {project.title}
+        </h2>
+        <p className="text-sm leading-6 text-secondary">
           {project.description}
         </p>
         {project.tags && (
-          <div className="mt-1 flex flex-wrap gap-x-3 gap-y-1 font-mono text-[11px] text-zinc-500">
+          <div className="mt-1 flex flex-wrap gap-x-3 gap-y-1 font-mono text-[11px] text-muted">
             {project.tags.map((tag) => (
               <span key={tag}>{tag}</span>
             ))}
@@ -63,10 +65,10 @@ export default function ProjectCard({
     </>
   );
 
-  const className = `group flex flex-col rounded-2xl border bg-zinc-950/60 p-6 transition-colors ${
+  const className = `group flex flex-col rounded-2xl border bg-surface p-6 transition-[border-color,background-color] duration-[130ms] ease-out hover:bg-surface-raised ${
     isLive
-      ? "border-emerald-400/40 hover:border-emerald-400/60"
-      : "border-white/10 hover:border-white/20"
+      ? "border-accent/40 hover:border-accent/60"
+      : "border-edge hover:border-accent"
   }`;
 
   if (!project.href) {

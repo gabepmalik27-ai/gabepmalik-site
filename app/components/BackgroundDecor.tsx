@@ -12,26 +12,26 @@ export default function BackgroundDecor() {
       className="pointer-events-none fixed inset-0 overflow-hidden select-none"
     >
       <div
-        className="absolute inset-0 opacity-[0.35]"
+        className="absolute inset-0 opacity-[0.4] text-muted"
         style={{
           backgroundImage:
-            "radial-gradient(rgba(255,255,255,0.15) 1px, transparent 1px)",
+            "radial-gradient(currentColor 1px, transparent 1px)",
           backgroundSize: "28px 28px",
         }}
       />
 
-      <div className="absolute top-[-18%] right-[-8%] h-[620px] w-[620px] rounded-full border border-emerald-400/10" />
-      <div className="absolute top-[-10%] right-[2%] h-[420px] w-[420px] rounded-full border border-emerald-400/15" />
-      <div className="absolute right-[16%] bottom-[-15%] h-[360px] w-[360px] rounded-full border border-white/[.06]" />
+      <div className="absolute top-[-18%] right-[-8%] h-[620px] w-[620px] rounded-full border border-accent/10" />
+      <div className="absolute top-[-10%] right-[2%] h-[420px] w-[420px] rounded-full border border-accent/15" />
+      <div className="absolute right-[16%] bottom-[-15%] h-[360px] w-[360px] rounded-full border border-edge" />
 
-      <div className="absolute top-1/4 right-[8%] font-mono text-[420px] leading-none font-black text-emerald-400/[0.05]">
+      <div className="absolute top-1/4 right-[8%] font-display text-[420px] leading-none font-black text-accent/[0.06]">
         M
       </div>
 
       {crossMarks.map((position) => (
         <span
           key={position}
-          className={`absolute ${position} font-mono text-sm text-white/15`}
+          className={`absolute ${position} font-mono text-sm text-muted/60`}
         >
           +
         </span>

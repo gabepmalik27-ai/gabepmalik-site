@@ -20,6 +20,7 @@ export const projects: Project[] = [
     href: "https://finance-learning-website.vercel.app",
     status: "live",
     icon: "chart",
+    tags: ["Next.js", "TypeScript", "Finance"],
   },
   {
     slug: "snake",
@@ -47,6 +48,16 @@ export const projects: Project[] = [
     description: "A placeholder for the third app. Direct, no fluff.",
     href: null,
     status: "in-progress",
-    icon: "terminal",
+    icon: "chevrons",
+  },
+  {
+    slug: "valuation-tracker",
+    title: "Valuation Tracker",
+    description:
+      "A dashboard for tracking company valuations, price targets, and implied returns over time.",
+    href: "https://valuation-tracker.vercel.app",
+    status: "live",
+    icon: "chart",
+    tags: ["Next.js", "Recharts", "Vercel Blob"],
   },
 ];

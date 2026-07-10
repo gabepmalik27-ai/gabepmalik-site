@@ -1,4 +1,64 @@
-import { MenuIcon, SearchIcon, SunIcon } from "./icons";
+"use client";
+
+import { useEffect, useRef, useState } from "react";
+import ThemeToggle from "./ThemeToggle";
+import { SearchIcon } from "./icons";
+
+function PersonalMark() {
+  return (
+    <div className="flex h-7 w-7 shrink-0 items-center justify-center rounded border border-accent">
+      <span className="font-mono text-[10px] font-semibold text-accent">
+        GM
+      </span>
+    </div>
+  );
+}
+
+function FamilyMark() {
+  return (
+    <svg
+      width="36"
+      height="36"
+      viewBox="0 0 36 36"
+      fill="none"
+      className="shrink-0 text-accent"
+    >
+      <circle
+        cx="18"
+        cy="18"
+        r="16"
+        stroke="currentColor"
+        strokeWidth="0.75"
+        opacity="0.35"
+      />
+      <circle
+        cx="18"
+        cy="18"
+        r="11"
+        stroke="currentColor"
+        strokeWidth="0.75"
+        opacity="0.6"
+      />
+      <circle
+        cx="18"
+        cy="18"
+        r="6.5"
+        stroke="currentColor"
+        strokeWidth="0.75"
+        opacity="0.85"
+      />
+      <path
+        d="M12 24V13l6 7 6-7v11"
+        stroke="currentColor"
+        strokeWidth="1.4"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
+
+const menuItems = ["About", "Resume", "Contact", "GitHub"];
 
 export default function SiteHeader({
   query,
@@ -7,48 +67,73 @@ export default function SiteHeader({
   query: string;
   onQueryChange: (value: string) => void;
 }) {
-  return (
-    <header className="relative flex items-center justify-between gap-4 px-6 py-6 sm:px-10">
-      <div className="flex items-center gap-3">
-        <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl border border-emerald-400/30 font-mono text-xs font-semibold text-emerald-400">
-          GM
-        </div>
-        <span className="text-lg font-bold text-zinc-50">
-          G. Malik Projects
-        </span>
-      </div>
+  const [menuOpen, setMenuOpen] = useState(false);
+  const menuRef = useRef<HTMLDivElement>(null);
 
-      <div className="absolute left-1/2 hidden -translate-x-1/2 sm:block">
-        <div className="flex h-12 w-12 items-center justify-center rounded-full border border-emerald-400/40">
-          <div className="flex h-8 w-8 items-center justify-center rounded-full border border-emerald-400/40">
-            <span className="font-mono text-xs font-semibold text-emerald-400">
-              M
-            </span>
+  useEffect(() => {
+    function handleClickOutside(e: MouseEvent) {
+      if (menuRef.current && !menuRef.current.contains(e.target as Node)) {
+        setMenuOpen(false);
+      }
+    }
+    if (menuOpen) document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, [menuOpen]);
+
+  return (
+    <nav className="fixed top-0 right-0 left-0 z-50 h-14 border-b border-edge bg-surface">
+      <div className="mx-auto grid h-full max-w-6xl grid-cols-3 items-center gap-4 px-6">
+        <div className="flex items-center gap-2.5">
+          <PersonalMark />
+          <span className="font-display text-sm font-semibold whitespace-nowrap text-primary">
+            G. Malik Projects
+          </span>
+        </div>
+
+        <div className="flex justify-center">
+          <FamilyMark />
+        </div>
+
+        <div className="flex items-center justify-end gap-3">
+          <ThemeToggle />
+
+          <div className="relative">
+            <input
+              type="text"
+              placeholder="Search projects"
+              value={query}
+              onChange={(event) => onQueryChange(event.target.value)}
+              className="h-8 w-44 rounded-[6px] border border-edge bg-base px-3 pr-7 text-xs text-primary transition-colors duration-[130ms] placeholder:text-muted focus:border-accent focus:outline-none"
+            />
+            <SearchIcon className="pointer-events-none absolute top-1/2 right-2.5 h-3 w-3 -translate-y-1/2 text-muted" />
+          </div>
+
+          <div className="relative" ref={menuRef}>
+            <button
+              onClick={() => setMenuOpen((o) => !o)}
+              aria-label="Open menu"
+              className="flex h-8 w-8 cursor-pointer flex-col items-center justify-center gap-[5px] text-muted transition-colors duration-[130ms] hover:text-primary"
+            >
+              <span className="block h-px w-4 bg-current" />
+              <span className="block h-px w-4 bg-current" />
+              <span className="block h-px w-4 bg-current" />
+            </button>
+
+            {menuOpen && (
+              <div className="absolute top-[calc(100%+6px)] right-0 w-44 overflow-hidden rounded-[9px] border border-edge bg-surface py-1">
+                {menuItems.map((item) => (
+                  <button
+                    key={item}
+                    className="w-full cursor-pointer px-4 py-2 text-left text-sm text-secondary transition-colors duration-[130ms] hover:bg-surface-raised hover:text-primary"
+                  >
+                    {item}
+                  </button>
+                ))}
+              </div>
+            )}
           </div>
         </div>
       </div>
-
-      <div className="flex items-center gap-3">
-        <SunIcon className="hidden h-5 w-5 text-zinc-500 sm:block" />
-        <label className="relative">
-          <span className="sr-only">Search projects</span>
-          <input
-            type="text"
-            value={query}
-            onChange={(event) => onQueryChange(event.target.value)}
-            placeholder="Search projects"
-            className="w-36 rounded-full border border-white/10 bg-white/[.03] py-2 pr-9 pl-4 text-sm text-zinc-200 placeholder:text-zinc-500 focus:border-emerald-400/40 focus:outline-none sm:w-56"
-          />
-          <SearchIcon className="pointer-events-none absolute top-1/2 right-3 h-4 w-4 -translate-y-1/2 text-zinc-500" />
-        </label>
-        <button
-          type="button"
-          aria-label="Menu"
-          className="flex h-9 w-9 items-center justify-center rounded-lg text-zinc-400 hover:text-zinc-200"
-        >
-          <MenuIcon className="h-5 w-5" />
-        </button>
-      </div>
-    </header>
+    </nav>
   );
 }

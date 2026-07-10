@@ -1,18 +1,53 @@
 @import "tailwindcss";
 
+@variant dark (&:is(.dark, .dark *));
+
+/* Light mode tokens */
 :root {
-  --background: #000000;
-  --foreground: #ededed;
+  --bg-base: #F7F6F1;
+  --bg-surface: #FFFFFF;
+  --bg-surface-raised: #EFEDE5;
+  --border: #DEDBD1;
+  --text-primary: #141815;
+  --text-secondary: #4B5148;
+  --text-muted: #8A8F84;
+  --accent: #3D6037;
+  --accent-hover: #2E4A2A;
+  --accent-muted-bg: #E7ECE3;
+}
+
+/* Dark mode tokens */
+.dark {
+  --bg-base: #0B0E0C;
+  --bg-surface: #141815;
+  --bg-surface-raised: #1C2620;
+  --border: #293229;
+  --text-primary: #F4F2EC;
+  --text-secondary: #A9AFA6;
+  --text-muted: #6B7268;
+  --accent: #4F8F63;
+  --accent-hover: #66A878;
+  --accent-muted-bg: #1B2A20;
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-base: var(--bg-base);
+  --color-surface: var(--bg-surface);
+  --color-surface-raised: var(--bg-surface-raised);
+  --color-edge: var(--border);
+  --color-primary: var(--text-primary);
+  --color-secondary: var(--text-secondary);
+  --color-muted: var(--text-muted);
+  --color-accent: var(--accent);
+  --color-accent-hover: var(--accent-hover);
+  --color-accent-muted: var(--accent-muted-bg);
+
+  --font-sans: var(--font-inter);
+  --font-display: var(--font-inter-tight);
+  --font-mono: var(--font-jetbrains-mono);
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
+  background-color: var(--bg-base);
+  color: var(--text-primary);
 }
