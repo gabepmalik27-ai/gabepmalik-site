@@ -43,14 +43,6 @@ export const projects: Project[] = [
     tags: ["Next.js", "Prisma"],
   },
   {
-    slug: "project-three",
-    title: "Project three",
-    description: "A placeholder for the third app. Direct, no fluff.",
-    href: null,
-    status: "in-progress",
-    icon: "chevrons",
-  },
-  {
     slug: "valuation-tracker",
     title: "Valuation Tracker",
     description:

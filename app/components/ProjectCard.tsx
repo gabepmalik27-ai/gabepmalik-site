@@ -38,17 +38,17 @@ export default function ProjectCard({
         </span>
       </div>
 
-      <div className="flex flex-1 items-center justify-center py-10">
-        <div className="relative flex h-24 w-24 items-center justify-center rounded-full border border-edge bg-accent-muted">
+      <div className="flex flex-1 items-center justify-center py-6">
+        <div className="relative flex h-16 w-16 items-center justify-center rounded-full border border-edge bg-accent-muted">
           {isLive && (
             <div className="absolute inset-0 -z-10 rounded-full bg-accent/20 blur-xl" />
           )}
-          <Icon className="h-9 w-9 text-accent" />
+          <Icon className="h-6 w-6 text-accent" />
         </div>
       </div>
 
       <div className="flex flex-col gap-1.5">
-        <h2 className="font-display text-lg font-bold text-primary">
+        <h2 className="font-display text-base font-bold text-primary">
           {project.title}
         </h2>
         <p className="text-sm leading-6 text-secondary">
@@ -65,7 +65,7 @@ export default function ProjectCard({
     </>
   );
 
-  const className = `group flex flex-col rounded-2xl border bg-surface p-6 transition-[border-color,background-color] duration-[130ms] ease-out hover:bg-surface-raised ${
+  const className = `group flex flex-col rounded-2xl border bg-surface p-5 transition-[border-color,background-color] duration-[130ms] ease-out hover:bg-surface-raised ${
     isLive
       ? "border-accent/40 hover:border-accent/60"
       : "border-edge hover:border-accent"
