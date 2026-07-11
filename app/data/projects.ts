@@ -1,5 +1,6 @@
 export type ProjectStatus = "in-progress" | "live";
 export type ProjectIcon = "chart" | "chevrons" | "terminal" | "grid";
+export type ProjectCategory = "Web Apps" | "Games" | "Learning" | "Experiments";
 
 export interface Project {
   slug: string;
@@ -8,6 +9,7 @@ export interface Project {
   href: string | null;
   status: ProjectStatus;
   icon: ProjectIcon;
+  category: ProjectCategory;
   tags?: string[];
 }
 
@@ -20,6 +22,7 @@ export const projects: Project[] = [
     href: "https://finance-learning-website.vercel.app",
     status: "live",
     icon: "chart",
+    category: "Learning",
     tags: ["Next.js", "TypeScript", "Finance"],
   },
   {
@@ -30,6 +33,7 @@ export const projects: Project[] = [
     href: "https://snake-game-gmalikprojects.vercel.app",
     status: "live",
     icon: "grid",
+    category: "Games",
     tags: ["React", "Vite", "Tailwind", "Canvas"],
   },
   {
@@ -40,6 +44,7 @@ export const projects: Project[] = [
     href: "https://job-application-tracker-seven-ecru.vercel.app",
     status: "live",
     icon: "terminal",
+    category: "Web Apps",
     tags: ["Next.js", "Prisma"],
   },
   {
@@ -50,6 +55,7 @@ export const projects: Project[] = [
     href: "https://valuation-tracker-indol.vercel.app",
     status: "live",
     icon: "chart",
+    category: "Web Apps",
     tags: ["Next.js", "Recharts", "Vercel Blob"],
   },
 ];

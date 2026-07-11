@@ -18,16 +18,16 @@
 
 /* Dark mode tokens */
 .dark {
-  --bg-base: #0B0E0C;
-  --bg-surface: #141815;
-  --bg-surface-raised: #1C2620;
-  --border: #293229;
+  --bg-base: #0A0C0A;
+  --bg-surface: #111713;
+  --bg-surface-raised: #1A231C;
+  --border: #232B24;
   --text-primary: #F4F2EC;
   --text-secondary: #A9AFA6;
   --text-muted: #6B7268;
-  --accent: #4F8F63;
-  --accent-hover: #66A878;
-  --accent-muted-bg: #1B2A20;
+  --accent: #6FDD7E;
+  --accent-hover: #89E896;
+  --accent-muted-bg: #16261A;
 }
 
 @theme inline {

@@ -1,55 +1,101 @@
 "use client";
 
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import BackgroundDecor from "./components/BackgroundDecor";
 import SiteHeader from "./components/SiteHeader";
-import ProjectCard from "./components/ProjectCard";
+import Sidebar from "./components/Sidebar";
+import HeroSection from "./components/HeroSection";
+import FilterTabs from "./components/FilterTabs";
+import ProjectRow from "./components/ProjectRow";
 import { projects } from "./data/projects";
+
+const categoryToNavLabel: Record<string, string> = {
+  "All Projects": "Overview",
+  "Web Apps": "Web Apps",
+  Games: "Games",
+  Learning: "Learning",
+  Experiments: "Experiments",
+};
 
 export default function Home() {
   const [query, setQuery] = useState("");
+  const [activeCategory, setActiveCategory] = useState("All Projects");
+  const [activeNavLabel, setActiveNavLabel] = useState("Overview");
+  const [sort, setSort] = useState<"Latest" | "Title A–Z">("Latest");
 
-  const filtered = projects.filter((project) =>
-    `${project.title} ${project.description}`
-      .toLowerCase()
-      .includes(query.toLowerCase()),
-  );
+  function selectCategory(category: string) {
+    setActiveCategory(category);
+    setActiveNavLabel(categoryToNavLabel[category] ?? "Overview");
+  }
+
+  const filtered = useMemo(() => {
+    const bySearchAndCategory = projects.filter((project) => {
+      const matchesQuery = `${project.title} ${project.description}`
+        .toLowerCase()
+        .includes(query.toLowerCase());
+      const matchesCategory =
+        activeCategory === "All Projects" || project.category === activeCategory;
+      return matchesQuery && matchesCategory;
+    });
+
+    return sort === "Title A–Z"
+      ? [...bySearchAndCategory].sort((a, b) => a.title.localeCompare(b.title))
+      : bySearchAndCategory;
+  }, [query, activeCategory, sort]);
+
+  const liveCount = projects.filter((p) => p.status === "live").length;
 
   return (
     <div className="relative min-h-screen bg-base font-sans text-primary">
       <BackgroundDecor />
       <SiteHeader query={query} onQueryChange={setQuery} />
 
-      <main className="relative mx-auto w-full max-w-6xl px-6 pt-36 pb-16 sm:px-10">
-        <p className="font-mono text-xs tracking-[0.3em] text-muted">
-          SELECTED WORK
-        </p>
-        <h1 className="mt-3 font-display text-5xl font-extrabold tracking-tight text-primary sm:text-6xl">
-          Projects
-        </h1>
+      <Sidebar
+        activeLabel={activeNavLabel}
+        onSelect={(label, category) => {
+          if (category) {
+            selectCategory(category);
+          } else {
+            setActiveNavLabel(label);
+          }
+        }}
+      />
 
-        {filtered.length === 0 ? (
-          <p className="mt-4 font-mono text-xs text-muted">
-            no projects match &quot;{query}&quot;
-          </p>
-        ) : (
-          <div className="mt-12 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
-            {filtered.map((project) => (
-              <ProjectCard
-                key={project.slug}
-                project={project}
-                index={projects.indexOf(project)}
-                total={projects.length}
-              />
-            ))}
+      <div className="pt-16 lg:pl-60">
+        <main className="relative min-w-0 px-6 py-10 sm:px-10">
+          <HeroSection projectCount={projects.length} liveCount={liveCount} />
+
+          <div className="mt-10">
+            <FilterTabs
+              activeCategory={activeCategory}
+              onSelectCategory={selectCategory}
+              sort={sort}
+              onSortChange={setSort}
+            />
           </div>
-        )}
-      </main>
 
-      <footer className="relative mx-auto max-w-6xl border-t border-edge px-6 py-8 font-mono text-xs text-muted sm:px-10">
-        <p>Gabriel Malik — {new Date().getFullYear()}</p>
-        <p>STATUS: OPERATIONAL · REV.01</p>
-      </footer>
+          {filtered.length === 0 ? (
+            <p className="mt-8 font-mono text-xs text-muted">
+              no projects match &quot;{query}&quot;
+            </p>
+          ) : (
+            <div className="mt-6 flex flex-col gap-4">
+              {filtered.map((project) => (
+                <ProjectRow
+                  key={project.slug}
+                  project={project}
+                  index={projects.indexOf(project)}
+                  total={projects.length}
+                />
+              ))}
+            </div>
+          )}
+        </main>
+
+        <footer className="relative border-t border-edge px-6 py-6 text-center font-mono text-xs text-muted">
+          <p>{"</> Ship small. Learn fast. Build what matters."}</p>
+        </footer>
+      </div>
     </div>
   );
 }

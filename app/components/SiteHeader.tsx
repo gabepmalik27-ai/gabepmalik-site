@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import ThemeToggle from "./ThemeToggle";
-import { SearchIcon } from "./icons";
+import { BellIcon, SearchIcon } from "./icons";
 
 function PersonalMark() {
   return (
@@ -81,16 +81,16 @@ export default function SiteHeader({
   }, [menuOpen]);
 
   return (
-    <nav className="fixed top-0 right-0 left-0 z-50 h-14 border-b border-edge bg-surface">
-      <div className="mx-auto grid h-full max-w-6xl grid-cols-3 items-center gap-4 px-6">
-        <div className="flex items-center gap-2.5">
+    <nav className="fixed top-0 right-0 left-0 z-50 h-16 border-b border-edge bg-surface">
+      <div className="grid h-full grid-cols-3 items-center gap-4 px-6">
+        <div className="flex min-w-0 items-center gap-2.5">
           <PersonalMark />
-          <span className="font-display text-sm font-semibold whitespace-nowrap text-primary">
+          <span className="hidden truncate font-display text-sm font-semibold text-primary sm:inline">
             G. Malik Projects
           </span>
         </div>
 
-        <div className="flex justify-center">
+        <div className="hidden justify-center sm:flex">
           <FamilyMark />
         </div>
 
@@ -103,7 +103,7 @@ export default function SiteHeader({
               placeholder="Search projects"
               value={query}
               onChange={(event) => onQueryChange(event.target.value)}
-              className="h-8 w-44 rounded-[6px] border border-edge bg-base px-3 pr-7 text-xs text-primary transition-colors duration-[130ms] placeholder:text-muted focus:border-accent focus:outline-none"
+              className="h-8 w-28 rounded-[6px] border border-edge bg-base px-3 pr-7 text-xs text-primary transition-colors duration-[130ms] placeholder:text-muted focus:border-accent focus:outline-none sm:w-44"
             />
             <SearchIcon className="pointer-events-none absolute top-1/2 right-2.5 h-3 w-3 -translate-y-1/2 text-muted" />
           </div>
@@ -112,11 +112,10 @@ export default function SiteHeader({
             <button
               onClick={() => setMenuOpen((o) => !o)}
               aria-label="Open menu"
-              className="flex h-8 w-8 cursor-pointer flex-col items-center justify-center gap-[5px] text-muted transition-colors duration-[130ms] hover:text-primary"
+              className="relative flex h-8 w-8 cursor-pointer items-center justify-center text-muted transition-colors duration-[130ms] hover:text-primary"
             >
-              <span className="block h-px w-4 bg-current" />
-              <span className="block h-px w-4 bg-current" />
-              <span className="block h-px w-4 bg-current" />
+              <BellIcon className="h-4.5 w-4.5" />
+              <span className="absolute top-1.5 right-1.5 h-1.5 w-1.5 rounded-full bg-accent" />
             </button>
 
             {menuOpen && (
